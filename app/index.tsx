@@ -21,15 +21,23 @@ export default function Index() {
     setNewItem("")
   }
 
-  const updateTodo = () => {
+  const updateTodo = (id: number) => {
+    setTodos((prevState: Array<ITodoItem>) => {
+      return prevState.map((item) => {
+        if (item.id === id) {
+          return { ...item, completed: !item.completed }
+        }
 
+        return item;
+      })
+    })
   }
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.container}>
         <Title name="Adicione seu item:" ></Title>
-        <Title name={newItem} upperCase={newItem.length > 10} ></Title>
+        <Title name={JSON.stringify(todos)}  ></Title>
         <TextInput
           value={newItem}
           onChangeText={setNewItem}
@@ -40,7 +48,7 @@ export default function Index() {
         <SuperButton title="Adicionar" onPress={addTodo}></SuperButton>
 
         {todos.map((item) => {
-          return <TodoItem todo={item} onPress={updateTodo} />
+          return <TodoItem todo={item} updateTodo={updateTodo} />
         })}
 
 

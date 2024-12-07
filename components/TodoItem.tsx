@@ -10,13 +10,17 @@ export interface ITodoItem {
 
 interface ITodoItemProps {
     todo: ITodoItem,
-    onPress: () => void
+    updateTodo: (id: number) => void
 }
 
-const TodoItem = ({ todo, onPress }: ITodoItemProps) => {
-    const { name, completed } = todo;
+const TodoItem = ({ todo, updateTodo }: ITodoItemProps) => {
+    const { id, name, completed } = todo;
+    const handleUpdate = () => {
+        updateTodo(id)
+    }
+
     return (
-        <TouchableOpacity style={styles.container} onPress={onPress} >
+        <TouchableOpacity style={styles.container} onPress={handleUpdate} >
             <Text style={styles.text}>{name}</Text>
             <Ionicons name={completed ? "bookmark" : "bookmark-outline"} size={24} color={theme.tint} />
         </TouchableOpacity>
