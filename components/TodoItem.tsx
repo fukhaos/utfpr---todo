@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
+import { Alert, TouchableOpacity, Text, StyleSheet } from 'react-native'
 import { theme } from './styles';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -11,16 +11,27 @@ export interface ITodoItem {
 interface ITodoItemProps {
     todo: ITodoItem,
     updateTodo: (id: number) => void
+    deleteTodo: (id: number) => void
 }
 
-const TodoItem = ({ todo, updateTodo }: ITodoItemProps) => {
+const TodoItem = ({ todo, updateTodo, deleteTodo }: ITodoItemProps) => {
     const { id, name, completed } = todo;
     const handleUpdate = () => {
         updateTodo(id)
     }
 
+    const handleDelete = () => {
+        Alert.alert("Apagar item", "Tem certeza ?", [
+            { text: "Não" },
+            {
+                text: "Sim",
+                onPress: () => { deleteTodo(id) }
+            }
+        ])
+    }
+
     return (
-        <TouchableOpacity style={styles.container} onPress={handleUpdate} >
+        <TouchableOpacity style={styles.container} onPress={handleUpdate} onLongPress={handleDelete} >
             <Text style={styles.text}>{name}</Text>
             <Ionicons name={completed ? "bookmark" : "bookmark-outline"} size={24} color={theme.tint} />
         </TouchableOpacity>
