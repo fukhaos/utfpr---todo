@@ -20,12 +20,12 @@ const SuperButton = (props: ISuperButton) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        width: '90%',
+        width: '100%',
         height: 50,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'purple',
-        margin: 16,
+        marginVertical: 16,
         borderRadius: 25,
     },
     text: {
