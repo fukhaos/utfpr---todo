@@ -28,7 +28,7 @@ export default function Index() {
         <SuperButton title="Adicionar" onPress={addTodo}></SuperButton>
 
         {todos.map((item) => {
-          return <TodoItem />
+          return <TodoItem name={item} />
         })}
 
 

@@ -1,11 +1,14 @@
 import { View, Text, StyleSheet } from 'react-native'
 import { theme } from './styles';
 
+interface ITodoItem {
+    name: string
+}
 
-const TodoItem = () => {
+const TodoItem = ({ name }: ITodoItem) => {
     return (
         <View style={styles.container} >
-            <Text style={styles.text}>Nome da tarefa</Text>
+            <Text style={styles.text}>{name}</Text>
         </View>
     )
 }
