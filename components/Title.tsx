@@ -6,6 +6,12 @@ interface ITitle {
     upperCase?: boolean;
 }
 
+/**
+ * Criar um component bonitão de titulo
+ * @param props que tem name que mostra o conteudo e upperCase pra deixar maisculo
+ * @returns um View
+ */
+
 const Title = ({ name, upperCase }: ITitle) => {
     let value = name;
     if (upperCase) {
