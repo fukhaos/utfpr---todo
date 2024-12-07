@@ -2,16 +2,27 @@ import Title from "@/components/Title";
 import { TextInput, ScrollView, Text, View, StyleSheet } from "react-native";
 import { theme, styles } from '@/components/styles'
 import SuperButton from "@/components/SuperButton";
-import TodoItem from "@/components/TodoItem";
+import TodoItem, { ITodoItem } from "@/components/TodoItem";
 import { useState } from "react";
 
 export default function Index() {
 
   const [newItem, setNewItem] = useState<string>("");
-  const [todos, setTodos] = useState<Array<string>>([])
+  const [todos, setTodos] = useState<Array<ITodoItem>>([])
 
   const addTodo = () => {
-    setTodos([...todos, newItem])
+    const todoItem: ITodoItem = {
+      id: Date.now(),
+      name: newItem,
+      completed: false
+    }
+
+    setTodos([...todos, todoItem])
+    setNewItem("")
+  }
+
+  const updateTodo = () => {
+
   }
 
   return (
@@ -20,6 +31,7 @@ export default function Index() {
         <Title name="Adicione seu item:" ></Title>
         <Title name={newItem} upperCase={newItem.length > 10} ></Title>
         <TextInput
+          value={newItem}
           onChangeText={setNewItem}
           style={styles.input}
           placeholderTextColor={theme.placeholderTextColor}
@@ -28,7 +40,7 @@ export default function Index() {
         <SuperButton title="Adicionar" onPress={addTodo}></SuperButton>
 
         {todos.map((item) => {
-          return <TodoItem name={item} />
+          return <TodoItem todo={item} onPress={updateTodo} />
         })}
 
 

@@ -1,27 +1,39 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
 import { theme } from './styles';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
-interface ITodoItem {
-    name: string
+export interface ITodoItem {
+    id: number,
+    name: string,
+    completed: boolean,
 }
 
-const TodoItem = ({ name }: ITodoItem) => {
+interface ITodoItemProps {
+    todo: ITodoItem,
+    onPress: () => void
+}
+
+const TodoItem = ({ todo, onPress }: ITodoItemProps) => {
+    const { name, completed } = todo;
     return (
-        <View style={styles.container} >
+        <TouchableOpacity style={styles.container} onPress={onPress} >
             <Text style={styles.text}>{name}</Text>
-        </View>
+            <Ionicons name={completed ? "bookmark" : "bookmark-outline"} size={24} color={theme.tint} />
+        </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+        flexDirection: 'row',
         backgroundColor: theme.placeholderTextColor,
         width: '100%',
         height: 40,
         marginBottom: 16,
         borderRadius: 8,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'space-between',
+        paddingHorizontal: 16
     },
     text: {
         color: '#AAA'
