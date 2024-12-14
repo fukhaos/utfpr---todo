@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
         padding: 8,
     },
     input: {
+        color: theme.tint,
         width: '100%',
         height: 40,
         borderWidth: 1,
